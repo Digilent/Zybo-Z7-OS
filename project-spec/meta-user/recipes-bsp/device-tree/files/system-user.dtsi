@@ -230,7 +230,6 @@
 };
 
 &mipi_csi2_rx_subsystem_0 {
-	xlnx,axis-tdata-width = <16>;
 	reset-gpios = <&gpio0 57 GPIO_ACTIVE_LOW>;
 };
 
