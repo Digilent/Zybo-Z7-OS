@@ -231,6 +231,50 @@
 
 &mipi_csi2_rx_subsystem_0 {
 	reset-gpios = <&gpio0 57 GPIO_ACTIVE_LOW>;
+
+	csiss_ports: ports {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		csiss_port0: port@0 {
+			/* Fill cfa-pattern=rggb for raw data types, other fields video-format and video-width user needs to fill */
+			reg = <0>;
+			xlnx,cfa-pattern = "rggb";
+			xlnx,video-format = <12>;
+			xlnx,video-width = <8>;
+			csiss_out: endpoint {
+				remote-endpoint = <&vcap_mipi_in>;
+			};
+		};
+		csiss_port1: port@1 {
+			/* Fill cfa-pattern=rggb for raw data types, other fields video-format,video-width user needs to fill */
+			/* User need to add something like remote-endpoint=<&out> under the node csiss_in:endpoint */
+			reg = <1>;
+			xlnx,cfa-pattern = "rggb";
+			xlnx,video-format = <12>;
+			xlnx,video-width = <8>;
+			csiss_in: endpoint {
+			};
+		};
+	};
+};
+
+&amba_pl {
+	vcap_mipi {
+		compatible = "xlnx,video";
+		dma-names = "port0";
+		dmas = <&v_frmbuf_wr_0 0>;
+		vcap_mipi_ports: ports {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			vcap_mipi_port: port@0 {
+				direction = "input";
+				reg = <0>;
+				vcap_mipi_in: endpoint {
+					remote-endpoint = <&csiss_out>;
+				};
+			};
+		};
+	};
 };
 
 &csiss_port0 {
