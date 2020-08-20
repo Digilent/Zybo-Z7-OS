@@ -1,0 +1,17 @@
+CONFIG_mtd-utils=y
+CONFIG_can-utils=y
+CONFIG_openssh-sftp-server=y
+CONFIG_pciutils=y
+CONFIG_run-postinsts=y
+CONFIG_haveged=y
+CONFIG_fpga-manager-script=y
+CONFIG_packagegroup-core-boot=y
+CONFIG_packagegroup-core-ssh-dropbear=y
+CONFIG_tcf-agent=y
+CONFIG_bridge-utils=y
+CONFIG_udev-extraconf=y
+CONFIG_imagefeature-ssh-server-dropbear=y
+CONFIG_imagefeature-hwcodecs=y
+CONFIG_imagefeature-debug-tweaks=y
+CONFIG_ROOTFS_ROOT_PASSWD="root"
+CONFIG_ADD_EXTRA_USERS="petalinux:petalinux;"
