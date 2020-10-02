@@ -1,0 +1,410 @@
+From 6f60c51731d37d7fe314bf4a39fe305e303dfe0f Mon Sep 17 00:00:00 2001
+From: Sam Bobrowicz <sbobrowicz@digilentinc.com>
+Date: Mon, 27 Apr 2015 17:17:28 -0700
+Subject: [PATCH 1/2] drm: xilinx: Add encoder for Digilent boards
+
+This commit is a squash of the following commits.
+
+commit 72f532b6614bea1ca807ac02d0390c87b96057cf
+Author: Demon000 <demonsingur@gmail.com>
+Date:   Fri Sep 13 12:22:13 2019 +0300
+
+    xilinx: digilent_encoder: fix compilation with 4.19
+
+commit f655796a043ab28019f01380a8406780d062c6d8
+Author: Sam Bobrowicz <sbobrowicz@digilentinc.com>
+Date:   Mon Jul 17 20:23:47 2017 -0700
+
+    drm: xilinx: Fix Digilent encoder device tree doc
+
+    Update the needed doc changes for previous commits.
+
+commit 4bd9d028191d8fab186e1f319a0af4f9de32d8f5
+Author: Sam Bobrowicz <sbobrowicz@digilentinc.com>
+Date:   Mon Jul 17 20:22:42 2017 -0700
+
+    drm: xilinx: Change Digilent encoder naming
+
+    Change references from dglnt to digilent to align with how we like
+    to refer to Digilent in u-boot and the Linux kernel.
+
+commit 7d03544145e62c6a77aae190d3f56d8d4fd16bde
+Author: Sam Bobrowicz <sbobrowicz@digilentinc.com>
+Date:   Mon Jul 17 19:31:58 2017 -0700
+
+    drm: digilent: add resolution properties to encoder
+
+    Add the ability to define maximum and prefferred frame dimenstions.
+    Also a maximum clock frequency. Frequency should be set considering
+    maximum serdes rate and also the rate the axi stream mm2s bus on the
+    vdma is clocked. If pixel clock is greater than the mm2s stream
+    clock then the output pipeline will underflow.
+
+commit 3ddcb3427745792dbd8d57775e653a511c08b41e (HEAD)
+Author: Sam Bobrowicz <sbobrowicz@digilentinc.com>
+Date:   Mon Apr 27 17:17:28 2015 -0700
+
+    drm: xilinx: Add encoder for Digilent boards
+
+    Add the dglnt_encoder driver that enables DRM support for the VGA and
+    HDMI output ports found on many Digilent boards.
+
+Signed-off-by: Sam Bobrowicz <sbobrowicz@digilentinc.com>
+---
+ .../bindings/drm/digilent_encoder.txt         |  37 +++
+ drivers/gpu/drm/xlnx/Kconfig                  |   6 +
+ drivers/gpu/drm/xlnx/Makefile                 |   2 +
+ drivers/gpu/drm/xlnx/digilent_encoder.c       | 273 ++++++++++++++++++
+ 4 files changed, 318 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/drm/digilent_encoder.txt
+ create mode 100644 drivers/gpu/drm/xlnx/digilent_encoder.c
+
+diff --git a/Documentation/devicetree/bindings/drm/digilent_encoder.txt b/Documentation/devicetree/bindings/drm/digilent_encoder.txt
+new file mode 100644
+index 000000000000..df88b407baec
+--- /dev/null
++++ b/Documentation/devicetree/bindings/drm/digilent_encoder.txt
+@@ -0,0 +1,37 @@
++Device-Tree bindings for Digilent DRM Encoder Slave
++
++This driver provides support for VGA and HDMI outputs on Digilent FPGA boards. The
++VGA or HDMI port must be connected to a Xilinx display pipeline via an axi2vid
++IP core.
++
++Required properties:
++ - compatible: Should be "digilent,drm-encoder".
++
++Optional properties:
++ - digilent,edid-i2c: The I2C device connected to the DDC bus on the video connector.
++                      This is used to obtain the supported resolutions of an attached 
++                      monitor. If not defined, then a default set of resolutions is used
++                      and the display will initialize to the closest available size 
++                      specified by vpref and hpref. Note most VGA connectors on Digilent 
++                      boards do not have the DDC bus routed out. 
++- digilent,fmax: The maximum pixel clock frequency allowed, in KHz (as integer). Should 
++                 be set considering maximum serdes rate and also the rate the axi stream
++                 mm2s bus on the vdma is clocked. If pixel clock is greater than the mm2s
++                 stream clock then the output pipeline will underflow. Default is 150000.
++- digilent,hmax: The maximum horizontal width allowed for resolutions (as integer). 
++                 Default is 1920. 
++- digilent,vmax: The maximum vertical height allowed for resolutions (as integer). 
++                 Default is 1080.
++- digilent,hpref: The preferred resolution width (as integer). Only used if edid-i2c not
++                  present or invalid. Can be used to control resolution at boot when no 
++                  EDID bus is available. Default is 1280.
++- digilent,vpref: The preferred resolution height (as integer). Only used if edid-i2c not
++                  present or invalid. Can be used to control resolution at boot when no 
++                  EDID bus is available. Default is 720.
++
++Example:
++
++      encoder_0: digilent_encoder {
++		   compatible = "digilent,drm-encoder";
++         digilent,edid-i2c = <&i2c1>;
++      };
+diff --git a/drivers/gpu/drm/xlnx/Kconfig b/drivers/gpu/drm/xlnx/Kconfig
+index 5463d4aa0302..240a04a03d96 100644
+--- a/drivers/gpu/drm/xlnx/Kconfig
++++ b/drivers/gpu/drm/xlnx/Kconfig
+@@ -104,3 +104,9 @@ config DRM_XLNX_BRIDGE_VTC
+ 	  Currently the support is added to the Xilinx Video Mixer and
+ 	  Xilinx PL display CRTC drivers. This driver provides ability
+ 	  to generate timings through the bridge layer.
++
++config DRM_DIGILENT_ENCODER
++	tristate "Digilent VGA/HDMI DRM Encoder Driver"
++	depends on DRM_XILINX
++	help
++	  DRM slave encoder for Video-out on Digilent boards.
+diff --git a/drivers/gpu/drm/xlnx/Makefile b/drivers/gpu/drm/xlnx/Makefile
+index 1d80be7d3e70..f17e4699cc08 100644
+--- a/drivers/gpu/drm/xlnx/Makefile
++++ b/drivers/gpu/drm/xlnx/Makefile
+@@ -19,3 +19,5 @@ obj-$(CONFIG_DRM_XLNX_SDI) += xlnx-sdi.o
+ 
+ zynqmp-dpsub-objs += zynqmp_disp.o zynqmp_dpsub.o zynqmp_dp.o
+ obj-$(CONFIG_DRM_ZYNQMP_DPSUB) += zynqmp-dpsub.o
++
++obj-$(CONFIG_DRM_DIGILENT_ENCODER) += digilent_encoder.o
+diff --git a/drivers/gpu/drm/xlnx/digilent_encoder.c b/drivers/gpu/drm/xlnx/digilent_encoder.c
+new file mode 100644
+index 000000000000..c697eaee0042
+--- /dev/null
++++ b/drivers/gpu/drm/xlnx/digilent_encoder.c
+@@ -0,0 +1,273 @@
++/*
++ * digilent_encoder.c - DRM slave encoder for Video-out on Digilent boards
++ *
++ * Copyright (C) 2015 Digilent
++ * Author: Sam Bobrowicz <sbobrowicz@digilentinc.com>
++ *
++ * Based on udl_encoder.c and udl_connector.c, Copyright (C) 2012 Red Hat.
++ * Also based on xilinx_drm_dp.c, Copyright (C) 2014 Xilinx, Inc.
++ * 
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++ *
++ */
++
++#include <drm/drmP.h>
++#include <drm/drm_edid.h>
++#include <drm/drm_encoder_slave.h>
++
++#include <linux/device.h>
++#include <linux/module.h>
++#include <linux/err.h>
++#include <linux/i2c.h>
++#include <linux/of.h>
++#include <linux/of_platform.h>
++#include <linux/platform_device.h>
++
++/*
++ * Default frame maximums/prefs; can be set in devicetree
++ */
++#define DIGILENT_ENC_MAX_FREQ 150000  //KHz
++#define DIGILENT_ENC_MAX_H 1920
++#define DIGILENT_ENC_MAX_V 1080
++#define DIGILENT_ENC_PREF_H 1280
++#define DIGILENT_ENC_PREF_V 720
++
++struct digilent_encoder {
++	struct drm_encoder *encoder;
++	struct i2c_adapter *i2c_bus;
++   bool i2c_present;
++   u32 fmax;
++   u32 hmax;
++   u32 vmax;
++   u32 hpref;
++   u32 vpref;
++};
++
++static inline struct digilent_encoder *to_digilent_encoder(struct drm_encoder *encoder)
++{
++	return to_encoder_slave(encoder)->slave_priv;
++}
++
++static bool digilent_mode_fixup(struct drm_encoder *encoder,
++			   const struct drm_display_mode *mode,
++			   struct drm_display_mode *adjusted_mode)
++{
++	return true;
++}
++
++static void digilent_encoder_mode_set(struct drm_encoder *encoder,
++				 struct drm_display_mode *mode,
++				 struct drm_display_mode *adjusted_mode)
++{
++}
++
++static void
++digilent_encoder_dpms(struct drm_encoder *encoder, int mode)
++{
++}
++
++static void digilent_encoder_save(struct drm_encoder *encoder)
++{
++}
++
++static void digilent_encoder_restore(struct drm_encoder *encoder)
++{
++}
++
++static int digilent_encoder_mode_valid(struct drm_encoder *encoder,
++				    struct drm_display_mode *mode)
++{
++   struct digilent_encoder *digilent = to_digilent_encoder(encoder);
++   if (mode && 
++      !(mode->flags & ((DRM_MODE_FLAG_INTERLACE | DRM_MODE_FLAG_DBLCLK) | DRM_MODE_FLAG_3D_MASK)) &&
++      (mode->clock <= digilent->fmax) &&
++      (mode->hdisplay <= digilent->hmax) && 
++      (mode->vdisplay <= digilent->vmax)) 
++         return MODE_OK;
++   return MODE_BAD;
++}
++
++static int digilent_encoder_get_modes(struct drm_encoder *encoder,
++				   struct drm_connector *connector)
++{
++   struct digilent_encoder *digilent = to_digilent_encoder(encoder);
++	struct edid *edid;
++   int num_modes = 0;
++   
++   if (digilent->i2c_present)
++   {
++      edid = drm_get_edid(connector, digilent->i2c_bus);
++
++      /*
++       *Other drivers tend to call update edid property after the call to 
++       *drm_add_edid_modes. If problems with modesetting, this could be why.
++       */
++      drm_connector_update_edid_property(connector, edid);
++      if (edid) 
++      {
++         num_modes = drm_add_edid_modes(connector, edid);
++         kfree(edid);
++      }
++   }
++   else
++   {
++      num_modes = drm_add_modes_noedid(connector, digilent->hmax, digilent->vmax);
++      drm_set_preferred_mode(connector, digilent->hpref, digilent->vpref);
++   }   
++	return num_modes;
++}
++
++static enum drm_connector_status digilent_encoder_detect(struct drm_encoder *encoder,
++		     struct drm_connector *connector)
++{
++   struct digilent_encoder *digilent = to_digilent_encoder(encoder);
++
++   if (digilent->i2c_present)
++   {
++      if (drm_probe_ddc(digilent->i2c_bus))
++         return connector_status_connected;
++      return connector_status_disconnected;
++   }
++   else
++      return connector_status_unknown; 
++}
++
++static struct drm_encoder_slave_funcs digilent_encoder_slave_funcs = {
++	.dpms = digilent_encoder_dpms,
++	.save			= digilent_encoder_save,
++	.restore		= digilent_encoder_restore,
++	.mode_fixup = digilent_mode_fixup,
++	.mode_valid		= digilent_encoder_mode_valid,
++	.mode_set = digilent_encoder_mode_set,
++	.detect			= digilent_encoder_detect,
++	.get_modes		= digilent_encoder_get_modes,
++};
++
++static int digilent_encoder_encoder_init(struct platform_device *pdev,
++				      struct drm_device *dev,
++				      struct drm_encoder_slave *encoder)
++{
++	struct digilent_encoder *digilent = platform_get_drvdata(pdev);
++	struct device_node *sub_node;
++   int ret;
++
++	encoder->slave_priv = digilent;
++	encoder->slave_funcs = &digilent_encoder_slave_funcs;
++
++	digilent->encoder = &encoder->base;
++
++    /* get i2c adapter for edid */
++   digilent->i2c_present = false;
++
++	sub_node = of_parse_phandle(pdev->dev.of_node, "digilent,edid-i2c", 0);
++	if (sub_node) 
++   {
++	   digilent->i2c_bus = of_find_i2c_adapter_by_node(sub_node);
++      if (!digilent->i2c_bus)
++		   DRM_INFO("failed to get the edid i2c adapter, using default modes\n");
++      else
++         digilent->i2c_present = true;
++	   of_node_put(sub_node);
++   }
++
++	ret = of_property_read_u32(pdev->dev.of_node, "digilent,fmax", &digilent->fmax);
++	if (ret < 0) {
++      digilent->fmax = DIGILENT_ENC_MAX_FREQ;
++		DRM_INFO("No max frequency in DT, using default %dKHz\n", DIGILENT_ENC_MAX_FREQ);
++	}
++
++	ret = of_property_read_u32(pdev->dev.of_node, "digilent,hmax", &digilent->hmax);
++	if (ret < 0) {
++      digilent->hmax = DIGILENT_ENC_MAX_H;
++		DRM_INFO("No max horizontal width in DT, using default %d\n", DIGILENT_ENC_MAX_H);
++	}
++
++	ret = of_property_read_u32(pdev->dev.of_node, "digilent,vmax", &digilent->vmax);
++	if (ret < 0) {
++      digilent->vmax = DIGILENT_ENC_MAX_V;
++		DRM_INFO("No max vertical height in DT, using default %d\n", DIGILENT_ENC_MAX_V);
++	}
++
++	ret = of_property_read_u32(pdev->dev.of_node, "digilent,hpref", &digilent->hpref);
++	if (ret < 0) {
++      digilent->hpref = DIGILENT_ENC_PREF_H;
++		if (!(digilent->i2c_present))
++			DRM_INFO("No pref horizontal width in DT, using default %d\n", DIGILENT_ENC_PREF_H);
++	}
++
++	ret = of_property_read_u32(pdev->dev.of_node, "digilent,vpref", &digilent->vpref);
++	if (ret < 0) {
++      digilent->vpref = DIGILENT_ENC_PREF_V;
++		if (!(digilent->i2c_present))
++			DRM_INFO("No pref horizontal width in DT, using default %d\n", DIGILENT_ENC_PREF_V);
++	}
++
++	return 0;
++}
++
++static int digilent_encoder_probe(struct platform_device *pdev)
++{
++	struct digilent_encoder *digilent;
++
++	digilent = devm_kzalloc(&pdev->dev, sizeof(*digilent), GFP_KERNEL);
++	if (!digilent)
++		return -ENOMEM;
++
++	platform_set_drvdata(pdev, digilent);
++
++	return 0;
++}
++
++static int digilent_encoder_remove(struct platform_device *pdev)
++{
++	return 0;
++}
++
++static const struct of_device_id digilent_encoder_of_match[] = {
++	{ .compatible = "digilent,drm-encoder", },
++	{ /* end of table */ },
++};
++MODULE_DEVICE_TABLE(of, digilent_encoder_of_match);
++
++static struct drm_platform_encoder_driver digilent_encoder_driver = {
++	.platform_driver = {
++		.probe			= digilent_encoder_probe,
++		.remove			= digilent_encoder_remove,
++		.driver			= {
++			.owner		= THIS_MODULE,
++			.name		= "digilent-drm-enc",
++			.of_match_table	= digilent_encoder_of_match,
++		},
++	},
++
++	.encoder_init = digilent_encoder_encoder_init,
++};
++
++static int __init digilent_encoder_init(void)
++{
++	return platform_driver_register(&digilent_encoder_driver.platform_driver);
++}
++
++static void __exit digilent_encoder_exit(void)
++{
++	platform_driver_unregister(&digilent_encoder_driver.platform_driver);
++}
++
++module_init(digilent_encoder_init);
++module_exit(digilent_encoder_exit);
++
++MODULE_AUTHOR("Digilent, Inc.");
++MODULE_DESCRIPTION("DRM slave encoder for Video-out on Digilent boards");
++MODULE_LICENSE("GPL v2");
+-- 
+2.17.1
+
