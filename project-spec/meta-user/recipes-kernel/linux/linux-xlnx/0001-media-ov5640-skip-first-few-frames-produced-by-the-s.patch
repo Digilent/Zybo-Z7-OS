@@ -1,0 +1,54 @@
+From b8f2494c43597514ceaca27af8d5e2596de6f351 Mon Sep 17 00:00:00 2001
+From: Demon000 <demonsingur@gmail.com>
+Date: Wed, 21 Oct 2020 10:19:24 +0300
+Subject: [PATCH] media: ov5640: skip first few frames produced by the sensor
+
+---
+ drivers/media/i2c/ov5640.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/drivers/media/i2c/ov5640.c b/drivers/media/i2c/ov5640.c
+index 07dda9116928..fbe44f4cfb84 100644
+--- a/drivers/media/i2c/ov5640.c
++++ b/drivers/media/i2c/ov5640.c
+@@ -31,6 +31,8 @@
+ 
+ #define OV5640_DEFAULT_SLAVE_ID 0x3c
+ 
++#define OV5640_BAD_FRAMES_DURATION 1000
++
+ #define OV5640_REG_SYS_RESET02		0x3002
+ #define OV5640_REG_SYS_CLOCK_ENABLE02	0x3006
+ #define OV5640_REG_SYS_CTRL0		0x3008
+@@ -2868,6 +2870,12 @@ static int ov5640_s_stream(struct v4l2_subdev *sd, int enable)
+ 	return ret;
+ }
+ 
++static int ov5640_get_skip_frames(struct v4l2_subdev *sd, u32 *frames)
++{
++	*frames = 60;
++	return 0;
++}
++
+ static const struct v4l2_subdev_core_ops ov5640_core_ops = {
+ 	.s_power = ov5640_s_power,
+ 	.log_status = v4l2_ctrl_subdev_log_status,
+@@ -2889,10 +2897,15 @@ static const struct v4l2_subdev_pad_ops ov5640_pad_ops = {
+ 	.enum_frame_interval = ov5640_enum_frame_interval,
+ };
+ 
++static const struct v4l2_subdev_sensor_ops ov5640_sensor_ops = {
++	.g_skip_frames = ov5640_get_skip_frames,
++};
++
+ static const struct v4l2_subdev_ops ov5640_subdev_ops = {
+ 	.core = &ov5640_core_ops,
+ 	.video = &ov5640_video_ops,
+ 	.pad = &ov5640_pad_ops,
++	.sensor = &ov5640_sensor_ops,
+ };
+ 
+ static int ov5640_get_regulators(struct ov5640_dev *sensor)
+-- 
+2.29.0
+
