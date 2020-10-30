@@ -127,7 +127,7 @@
 
 		dailink0_master: simple-audio-card,cpu {
 			clocks = <&i2s_clk>;
-			sound-dai = <&axi_i2s_adi_0>;
+			sound-dai = <&axi_i2s_adi_1>;
 		};
 
 		simple-audio-card,codec {
@@ -137,7 +137,7 @@
 	};
 };
 
-&axi_i2s_adi_0 {
+&axi_i2s_adi_1 {
 	#sound-dai-cells = <0>;
 	compatible = "adi,axi-i2s-1.00.a";
 	clocks = <&clkc 15>, <&i2s_clk>;
