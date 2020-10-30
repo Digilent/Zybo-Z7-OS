@@ -17,7 +17,7 @@ INCLUDEFILES:=*.h
 
 OBJECTS =	$(addsuffix .o, $(basename $(wildcard *.c)))
 
-IPNAME=PWM_v2_0
+IPNAME=ddynclk
 
 libs: banner ${IPNAME}_libs clean
 
