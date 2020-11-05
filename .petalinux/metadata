@@ -1,6 +1,6 @@
 PETALINUX_VER=2020.1
 VALIDATE_HW_CHKSUM=1
-HARDWARE_PATH=/home/demon000/projects/Zybo-Z7-20-base-linux/hw/hw_handoff/system_wrapper.xsa
-HARDWARE_CHECKSUM=540ebf0be4cbe05f0c113bb05b053d02
+HARDWARE_PATH=/home/demon000/projects/Zybo-Z7-10-base-linux/hw/hw_handoff/system_wrapper.xsa
+HARDWARE_CHECKSUM=b89f2832d19b3712108172d9e1f2d909
 YOCTO_SDK=ec2933eff44b6c49df87d39a9666aafb
 RFSCONFIG_CHKSUM=8b46165f104f42e811d755e0e15bd108
