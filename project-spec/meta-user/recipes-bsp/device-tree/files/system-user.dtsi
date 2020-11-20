@@ -50,26 +50,48 @@
 };
 
 &amba_pl {
-	encoder_0: digilent_encoder {
-		compatible = "digilent,drm-encoder";
-		digilent,fmax = <150000>;
-		digilent,edid-i2c = <&i2c0>;
-	};
+	digilent_hdmi {
+		compatible = "digilent,hdmi";
 
-	xilinx_drm {
-		compatible = "xlnx,drm";
-		xlnx,vtc = <&v_tc_out>;
-		xlnx,connector-type = "HDMIA";
-		xlnx,encoder-slave = <&encoder_0>;
 		clocks = <&axi_dynclk_0>;
-		planes {
-			xlnx,pixel-format = "rgb888";
-			plane0 {
-				dmas = <&axi_vdma_1 0>;
-				dma-names = "dma0";
+		clock-names = "clk";
+
+		digilent,edid-i2c = <&i2c0>;
+		digilent,fmax = <150000>;
+
+		port@0 {
+			hdmi_ep: endpoint {
+				remote-endpoint = <&pl_disp_ep>;
 			};
 		};
 	};
+
+	xlnx_pl_disp {
+		compatible = "xlnx,pl-disp";
+
+		dmas = <&axi_vdma_1 0>;
+		dma-names = "dma0";
+
+		/*
+		 * See Documentation/devicetree/bindings/dma/xilinx/xilinx_frmbuf.txt
+		 * to find the equivalent DRM fourcc code for the format selected in
+		 * the Frame Buffer Reader, then see See include/uapi/drm/drm_fourcc.h
+		 * to find the corresponding 4-char string that should be placed here.
+		 */
+		xlnx,vformat = "XR24";
+		xlnx,bridge = <&v_tc_out>;
+
+		port@0 {
+			pl_disp_ep: endpoint {
+				remote-endpoint = <&hdmi_ep>;
+			};
+		};
+	};
+};
+
+&v_tc_out {
+	compatible = "xlnx,bridge-v-tc-6.1";
+	xlnx,pixels-per-clock = <1>;
 };
 
 &axi_dynclk_0 {
