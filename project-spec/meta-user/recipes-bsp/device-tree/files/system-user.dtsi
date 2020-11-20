@@ -73,7 +73,7 @@
 };
 
 &axi_dynclk_0 {
-	compatible = "digilent,axi-dynclk";
+	compatible = "dglnt,axi-dynclk";
 	#clock-cells = <0>;
 	clocks = <&clkc 15>;
 };
