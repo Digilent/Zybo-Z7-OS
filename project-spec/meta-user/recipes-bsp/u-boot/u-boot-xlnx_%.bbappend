@@ -1,6 +1,9 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-SRC_URI += "file://platform-top.h"
+SRC_URI += "file://platform-top.h \
+	    file://0001-zynq-Read-MAC-address-from-SPI-flash.patch \
+            file://user_2021-09-20-14-21-00.cfg \
+            "
 
 do_configure_append () {
 	if [ "${U_BOOT_AUTO_CONFIG}" = "1" ]; then
