@@ -33,18 +33,6 @@
 	usb-phy = <&usb_phy0>;
 };
 
-&sdhci0 {
-	u-boot,dm-pre-reloc;
-};
-
-&uart1 {
-	u-boot,dm-pre-reloc;
-};
-
-&qspi {
-	u-boot,dm-pre-reloc;
-};
-
 &flash0 {
 	compatible = "micron,m25p80", "s25fl128s", "spi-flash";
 };
@@ -211,6 +199,7 @@
 		gpio = <&gpio0 56 GPIO_ACTIVE_HIGH>;
 		startup-delay-us = <50000>;
 		enable-active-high;
+		regulator-always-on;
 	};
 
 	AVDD: fixed_regulator_AVDD@1 {
@@ -239,11 +228,9 @@
 		AVDD-supply = <&AVDD>;  /* 2.8v */
 		DVDD-supply = <&DVDD>;  /* 1.5v */
 
-		powerdown-gpios = <&gpio0 58 GPIO_ACTIVE_HIGH>;
-		reset-gpios = <&gpio0 59 GPIO_ACTIVE_LOW>;
 		port {
 			ov5640_to_mipi_csi2: endpoint {
-				remote-endpoint = <&csiss_in>;
+				remote-endpoint = <&mipi_csi_inmipi_csi2_rx_subsystem_0>;
 				clock-lanes = <0>;
 				data-lanes = <1 2>;
 			};
@@ -252,66 +239,81 @@
 };
 
 &mipi_csi2_rx_subsystem_0 {
-	reset-gpios = <&gpio0 57 GPIO_ACTIVE_LOW>;
-
-	csiss_ports: ports {
-		#address-cells = <1>;
-		#size-cells = <0>;
-		csiss_port0: port@0 {
-			/* Fill cfa-pattern=rggb for raw data types, other fields video-format and video-width user needs to fill */
-			reg = <0>;
-			xlnx,cfa-pattern = "rggb";
-			xlnx,video-format = <12>;
-			xlnx,video-width = <8>;
-			csiss_out: endpoint {
-				remote-endpoint = <&vcap_mipi_in>;
-			};
-		};
-		csiss_port1: port@1 {
-			/* Fill cfa-pattern=rggb for raw data types, other fields video-format,video-width user needs to fill */
-			/* User need to add something like remote-endpoint=<&out> under the node csiss_in:endpoint */
-			reg = <1>;
-			xlnx,cfa-pattern = "rggb";
-			xlnx,video-format = <12>;
-			xlnx,video-width = <8>;
-			csiss_in: endpoint {
-			};
-		};
-	};
+        video-reset-gpios = <&gpio0 57 GPIO_ACTIVE_LOW>;
+	xlnx,cal-mode = "FIXED";
+	xlnx,clk-io-swap = "false";
+                        xlnx,clk-lane-io-position = <0x0>;
+                        xlnx,clk-lp-io-swap = "false";
+                        xlnx,csi-en-activelanes = "false";
+                        xlnx,csi-en-crc = "true";
+                        xlnx,csi-filter-userdatatype = "false";
+                        xlnx,csi-opt1-regs = "false";
+                        xlnx,csi-pxl-format = <0x1e>;
+                        xlnx,csi2rx-dbg = <0x0>;
+                        xlnx,data-lane0-io-position = <0x2>;
+                        xlnx,data-lane1-io-position = <0x4>;
+                        xlnx,data-lane2-io-position = <0x6>;
+                        xlnx,data-lane3-io-position = <0x8>;
+                        xlnx,dl0-io-swap = "false";
+                        xlnx,dl0-lp-io-swap = "false";
+                        xlnx,dl1-io-swap = "false";
+                        xlnx,dl1-lp-io-swap = "false";
+                        xlnx,dl2-io-swap = "false";
+                        xlnx,dl2-lp-io-swap = "false";
+                        xlnx,dl3-io-swap = "false";
+                        xlnx,dl3-lp-io-swap = "false";
+                        xlnx,dphy-lanes = <0x2>;
+                        xlnx,dphy-mode = "SLAVE";
+                        xlnx,en-bg0-pin0 = "false";
+                        xlnx,en-bg0-pin6 = "false";
+                        xlnx,en-bg1-pin0 = "false";
+                        xlnx,en-bg1-pin6 = "false";
+                        xlnx,en-bg2-pin0 = "false";
+                        xlnx,en-bg2-pin6 = "false";
+                        xlnx,en-bg3-pin0 = "false";
+                        xlnx,en-bg3-pin6 = "false";
+                        xlnx,en-clk300m = "false";
+                        xlnx,en-cnts-byte-clk = "false";
+                        xlnx,en-csi-v2-0 = "false";
+                        xlnx,en-exdesigns = "false";
+                        xlnx,en-timeout-regs = "false";
+                        xlnx,en-vcx = "false";
+                        xlnx,esc-timeout = <0x6400>;
+                        xlnx,exdes-board = "ZCU102";
+                        xlnx,exdes-config = "MIPI_Video_Pipe_Camera_to_Display";
+                        xlnx,exdes-fmc = "LI-IMX274MIPI-FMC V1.0 Single Sensor";
+                        xlnx,fifo-rd-en-control = "true";
+                        xlnx,hs-line-rate = <0x320>;
+                        xlnx,hs-settle-ns = <0x93>;
+                        xlnx,hs-timeout = <0x10005>;
+                        xlnx,idly-group-name = "mipi_csi2rx_idly_group";
+                        xlnx,idly-tap = <0x2>;
+                        xlnx,init = <0x186a0>;
+                        xlnx,is-7series = "true";
+                        xlnx,is-versal = "false";
+                        xlnx,lprx-disable-extport = <0x0>;
+                        xlnx,mipi-slv-int = <0x0>;
+                        xlnx,ooc-vid-clk = "6.666";
+                        xlnx,rcve-alt-deskew-seq = "false";
+                        xlnx,rcve-deskew-seq = "false";
+                        xlnx,share-idlyctrl = "true";
+                        xlnx,stretch-line-rate = <0xdac>;
 };
 
-&amba_pl {
-	vcap_mipi {
-		compatible = "xlnx,video";
-		dma-names = "port0";
-		dmas = <&v_frmbuf_wr_0 0>;
-		vcap_mipi_ports: ports {
-			#address-cells = <1>;
-			#size-cells = <0>;
-			vcap_mipi_port: port@0 {
-				direction = "input";
-				reg = <0>;
-				vcap_mipi_in: endpoint {
-					remote-endpoint = <&csiss_out>;
-				};
-			};
-		};
-	};
-};
 
-&csiss_port0 {
+&mipi_csi_port0mipi_csi2_rx_subsystem_0 {
 	xlnx,video-format = <XVIP_VF_YUV_422>;
 };
 
-&csiss_port1 {
+&mipi_csi_port1mipi_csi2_rx_subsystem_0 {
 	xlnx,video-format = <XVIP_VF_YUV_422>;
 };
 
-&csiss_in {
-	data-lanes = <1 2>;
+&mipi_csi_inmipi_csi2_rx_subsystem_0 {
 	remote-endpoint = <&ov5640_to_mipi_csi2>;
 };
 
 &v_frmbuf_wr_0 {
 	reset-gpios = <&gpio0 54 GPIO_ACTIVE_LOW>;
 };
+
