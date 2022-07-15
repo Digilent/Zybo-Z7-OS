@@ -20,12 +20,20 @@
 };
 
 &gem0 {
-	phy-handle = <&ethernet_phy>;
-
-	ethernet_phy: ethernet-phy@1 { /* rtl8211e-vl */
-		reg = <1>;
-		device_type = "ethernet-phy";
-	};
+        phy-handle = <&ethernet_phy>;
+        ethernet_phy: ethernet-phy@0 {
+                device_type = "ethernet-phy";
+                reg = <0>;
+                /* dt-bindings/phy/realtek.h */
+                /* #define REALTEK_LED_LINK10              BIT(0)
+                   #define REALTEK_LED_LINK100             BIT(1)
+                   #define REALTEK_LED_LINK1000            BIT(3)
+                   #define REALTEK_LED_ACT                 BIT(4)
+                   #define REALTEK_LED_DEFAULT             BIT(7)
+                */
+                /* LED0=10+A, LED1=100+A, LED2=1000+A */
+                realtek,leds-config = <0x11 0x12 0x18>;
+        };
 };
 
 &usb0 {	
