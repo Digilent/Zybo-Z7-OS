@@ -33,18 +33,6 @@
 	usb-phy = <&usb_phy0>;
 };
 
-&sdhci0 {
-	u-boot,dm-pre-reloc;
-};
-
-&uart1 {
-	u-boot,dm-pre-reloc;
-};
-
-&qspi {
-	u-boot,dm-pre-reloc;
-};
-
 &flash0 {
 	compatible = "micron,m25p80", "s25fl128s", "spi-flash";
 };
