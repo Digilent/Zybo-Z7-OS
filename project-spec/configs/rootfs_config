@@ -115,7 +115,7 @@ CONFIG_system-zynq=y
 # CONFIG_e2fsprogs-dev is not set
 # CONFIG_e2fsprogs-tune2fs is not set
 # CONFIG_libe2p is not set
-CONFIG_e2fsprogs-mke2fs=y
+# CONFIG_e2fsprogs-mke2fs is not set
 # CONFIG_e2fsprogs-dbg is not set
 
 #
@@ -210,7 +210,7 @@ CONFIG_haveged=y
 #
 # modutils-initscripts 
 #
-# CONFIG_modutils-initscripts is not set
+CONFIG_modutils-initscripts=y
 # CONFIG_modutils-initscripts-dev is not set
 # CONFIG_modutils-initscripts-dbg is not set
 
@@ -490,7 +490,7 @@ CONFIG_can-utils=y
 #
 # lrzsz 
 #
-# CONFIG_lrzsz is not set
+CONFIG_lrzsz=y
 # CONFIG_lrzsz-dbg is not set
 # CONFIG_lrzsz-dev is not set
 
@@ -607,27 +607,27 @@ CONFIG_openssh-sftp-server=y
 #
 # alsa-utils 
 #
-# CONFIG_alsa-utils is not set
-# CONFIG_alsa-utils-aconnect is not set
-# CONFIG_alsa-utils-alsaloop is not set
-# CONFIG_alsa-utils-aseqdump is not set
-# CONFIG_alsa-utils-aplay is not set
-# CONFIG_alsa-utils-iecset is not set
-# CONFIG_alsa-utils-alsaucm is not set
+CONFIG_alsa-utils=y
+CONFIG_alsa-utils-aconnect=y
+CONFIG_alsa-utils-alsaloop=y
+CONFIG_alsa-utils-aseqdump=y
+CONFIG_alsa-utils-aplay=y
+CONFIG_alsa-utils-iecset=y
+CONFIG_alsa-utils-alsaucm=y
 # CONFIG_alsa-utils-dev is not set
-# CONFIG_alsa-utils-alsamixer is not set
-# CONFIG_alsa-utils-amixer is not set
-# CONFIG_alsa-utils-speakertest is not set
-# CONFIG_alsa-utils-alsactl is not set
+CONFIG_alsa-utils-alsamixer=y
+CONFIG_alsa-utils-amixer=y
+CONFIG_alsa-utils-speakertest=y
+CONFIG_alsa-utils-alsactl=y
 # CONFIG_alsa-utils-dbg is not set
-# CONFIG_alsa-utils-midi is not set
-# CONFIG_alsa-utils-aseqnet is not set
-# CONFIG_alsa-utils-alsatplg is not set
+CONFIG_alsa-utils-midi=y
+CONFIG_alsa-utils-aseqnet=y
+CONFIG_alsa-utils-alsatplg=y
 
 #
 # bash-completion 
 #
-# CONFIG_bash-completion is not set
+CONFIG_bash-completion=y
 # CONFIG_bash-completion-dev is not set
 # CONFIG_bash-completion-extra is not set
 # CONFIG_bash-completion-dbg is not set
@@ -674,7 +674,7 @@ CONFIG_openssh-sftp-server=y
 #
 # grep 
 #
-# CONFIG_grep is not set
+CONFIG_grep=y
 # CONFIG_grep-dbg is not set
 # CONFIG_grep-dev is not set
 
@@ -1903,43 +1903,43 @@ CONFIG_run-postinsts=y
 #
 # alsa-lib 
 #
-# CONFIG_alsa-lib is not set
+CONFIG_alsa-lib=y
 # CONFIG_alsa-lib-dbg is not set
 # CONFIG_alsa-lib-dev is not set
-# CONFIG_alsa-server is not set
-# CONFIG_libasound is not set
-# CONFIG_alsa-conf-base is not set
-# CONFIG_alsa-conf is not set
-# CONFIG_alsa-oss is not set
+CONFIG_alsa-server=y
+CONFIG_libasound=y
+CONFIG_alsa-conf-base=y
+CONFIG_alsa-conf=y
+CONFIG_alsa-oss=y
 
 #
 # libsndfile1 
 #
-# CONFIG_libsndfile1 is not set
+CONFIG_libsndfile1=y
 # CONFIG_libsndfile1-dbg is not set
 # CONFIG_libsndfile1-dev is not set
-# CONFIG_libsndfile1-bin is not set
+CONFIG_libsndfile1-bin=y
 
 #
 # pulseaudio 
 #
-# CONFIG_pulseaudio is not set
-# CONFIG_pulseaudio-misc is not set
-# CONFIG_libpulse-mainloop-glib is not set
+CONFIG_pulseaudio=y
+CONFIG_pulseaudio-misc=y
+CONFIG_libpulse-mainloop-glib=y
 # CONFIG_pulseaudio-dbg is not set
-# CONFIG_libpulsecommon is not set
-# CONFIG_pulseaudio-module-console-kit is not set
-# CONFIG_pulseaudio-bash-completion is not set
-# CONFIG_libpulse-simple is not set
-# CONFIG_libpulsecore is not set
-# CONFIG_libpulse is not set
+CONFIG_libpulsecommon=y
+CONFIG_pulseaudio-module-console-kit=y
+CONFIG_pulseaudio-bash-completion=y
+CONFIG_libpulse-simple=y
+CONFIG_libpulsecore=y
+CONFIG_libpulse=y
 # CONFIG_pulseaudio-dev is not set
-# CONFIG_pulseaudio-server is not set
+CONFIG_pulseaudio-server=y
 
 #
 # taglib 
 #
-# CONFIG_taglib is not set
+CONFIG_taglib=y
 # CONFIG_taglib-dev is not set
 # CONFIG_taglib-c is not set
 # CONFIG_taglib-dbg is not set
@@ -1947,7 +1947,7 @@ CONFIG_run-postinsts=y
 #
 # ncurses 
 #
-# CONFIG_ncurses is not set
+CONFIG_ncurses=y
 # CONFIG_ncurses-terminfo-base is not set
 # CONFIG_ncurses-dev is not set
 # CONFIG_ncurses-tools is not set
@@ -2156,10 +2156,10 @@ CONFIG_run-postinsts=y
 #
 # alsa-state 
 #
-# CONFIG_alsa-state is not set
+CONFIG_alsa-state=y
 # CONFIG_alsa-state-dev is not set
 # CONFIG_alsa-state-dbg is not set
-# CONFIG_alsa-states is not set
+CONFIG_alsa-states=y
 
 #
 # apache2
@@ -2311,7 +2311,7 @@ CONFIG_udev-extraconf=y
 #
 # gcc-runtime 
 #
-# CONFIG_libstdcPLUSPLUS is not set
+CONFIG_libstdcPLUSPLUS=y
 # CONFIG_libstdcPLUSPLUS-dev is not set
 
 #
@@ -2342,7 +2342,7 @@ CONFIG_udev-extraconf=y
 #
 # glib-2.0 
 #
-# CONFIG_glib-2.0 is not set
+CONFIG_glib-2.0=y
 # CONFIG_glib-2.0-codegen is not set
 # CONFIG_glib-2.0-utils is not set
 # CONFIG_glib-2.0-dbg is not set
@@ -2355,7 +2355,7 @@ CONFIG_udev-extraconf=y
 # CONFIG_glibc is not set
 # CONFIG_glibc-dev is not set
 # CONFIG_glibc-dbg is not set
-# CONFIG_ldd is not set
+CONFIG_ldd=y
 
 #
 # gnome-desktop-testing 
@@ -2587,7 +2587,7 @@ CONFIG_packagegroup-core-boot=y
 #
 # packagegroup-core-buildessential 
 #
-# CONFIG_packagegroup-core-buildessential is not set
+CONFIG_packagegroup-core-buildessential=y
 # CONFIG_packagegroup-core-buildessential-dev is not set
 # CONFIG_packagegroup-core-buildessential-dbg is not set
 
@@ -3103,11 +3103,11 @@ CONFIG_tcf-agent=y
 #
 # v4l-utils 
 #
-# CONFIG_v4l-utils is not set
-# CONFIG_libv4l is not set
+CONFIG_v4l-utils=y
+CONFIG_libv4l=y
 # CONFIG_ir-keytable is not set
 # CONFIG_v4l-utils-dev is not set
-# CONFIG_media-ctl is not set
+CONFIG_media-ctl=y
 # CONFIG_rc-keymaps is not set
 # CONFIG_v4l-utils-dbg is not set
 # CONFIG_libv4l-dev is not set
@@ -3334,7 +3334,7 @@ CONFIG_tcf-agent=y
 #
 # yavta 
 #
-# CONFIG_yavta is not set
+CONFIG_yavta=y
 # CONFIG_yavta-dbg is not set
 # CONFIG_yavta-dev is not set
 
@@ -3345,10 +3345,10 @@ CONFIG_tcf-agent=y
 #
 # alsa-plugins 
 #
-# CONFIG_alsa-plugins is not set
+CONFIG_alsa-plugins=y
 # CONFIG_alsa-plugins-dev is not set
 # CONFIG_alsa-plugins-dbg is not set
-# CONFIG_alsa-plugins-pulseaudio-conf is not set
+CONFIG_alsa-plugins-pulseaudio-conf=y
 
 #
 # gstreamer1.0 
@@ -3972,7 +3972,7 @@ CONFIG_imagefeature-ssh-server-dropbear=y
 CONFIG_imagefeature-hwcodecs=y
 # CONFIG_imagefeature-package-management is not set
 CONFIG_imagefeature-debug-tweaks=y
-CONFIG_auto-login=y
+# CONFIG_auto-login is not set
 
 #
 # apps 
