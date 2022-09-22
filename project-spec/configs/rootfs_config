@@ -115,7 +115,7 @@ CONFIG_system-zynq=y
 # CONFIG_e2fsprogs-dev is not set
 # CONFIG_e2fsprogs-tune2fs is not set
 # CONFIG_libe2p is not set
-# CONFIG_e2fsprogs-mke2fs is not set
+CONFIG_e2fsprogs-mke2fs=y
 # CONFIG_e2fsprogs-dbg is not set
 
 #
@@ -210,7 +210,7 @@ CONFIG_haveged=y
 #
 # modutils-initscripts 
 #
-CONFIG_modutils-initscripts=y
+# CONFIG_modutils-initscripts is not set
 # CONFIG_modutils-initscripts-dev is not set
 # CONFIG_modutils-initscripts-dbg is not set
 
@@ -490,7 +490,7 @@ CONFIG_can-utils=y
 #
 # lrzsz 
 #
-CONFIG_lrzsz=y
+# CONFIG_lrzsz is not set
 # CONFIG_lrzsz-dbg is not set
 # CONFIG_lrzsz-dev is not set
 
@@ -607,27 +607,27 @@ CONFIG_openssh-sftp-server=y
 #
 # alsa-utils 
 #
-CONFIG_alsa-utils=y
-CONFIG_alsa-utils-aconnect=y
-CONFIG_alsa-utils-alsaloop=y
-CONFIG_alsa-utils-aseqdump=y
-CONFIG_alsa-utils-aplay=y
-CONFIG_alsa-utils-iecset=y
-CONFIG_alsa-utils-alsaucm=y
+# CONFIG_alsa-utils is not set
+# CONFIG_alsa-utils-aconnect is not set
+# CONFIG_alsa-utils-alsaloop is not set
+# CONFIG_alsa-utils-aseqdump is not set
+# CONFIG_alsa-utils-aplay is not set
+# CONFIG_alsa-utils-iecset is not set
+# CONFIG_alsa-utils-alsaucm is not set
 # CONFIG_alsa-utils-dev is not set
-CONFIG_alsa-utils-alsamixer=y
-CONFIG_alsa-utils-amixer=y
-CONFIG_alsa-utils-speakertest=y
-CONFIG_alsa-utils-alsactl=y
+# CONFIG_alsa-utils-alsamixer is not set
+# CONFIG_alsa-utils-amixer is not set
+# CONFIG_alsa-utils-speakertest is not set
+# CONFIG_alsa-utils-alsactl is not set
 # CONFIG_alsa-utils-dbg is not set
-CONFIG_alsa-utils-midi=y
-CONFIG_alsa-utils-aseqnet=y
-CONFIG_alsa-utils-alsatplg=y
+# CONFIG_alsa-utils-midi is not set
+# CONFIG_alsa-utils-aseqnet is not set
+# CONFIG_alsa-utils-alsatplg is not set
 
 #
 # bash-completion 
 #
-CONFIG_bash-completion=y
+# CONFIG_bash-completion is not set
 # CONFIG_bash-completion-dev is not set
 # CONFIG_bash-completion-extra is not set
 # CONFIG_bash-completion-dbg is not set
@@ -674,7 +674,7 @@ CONFIG_bash-completion=y
 #
 # grep 
 #
-CONFIG_grep=y
+# CONFIG_grep is not set
 # CONFIG_grep-dbg is not set
 # CONFIG_grep-dev is not set
 
@@ -1229,7 +1229,6 @@ CONFIG_run-postinsts=y
 # CONFIG_boost-container is not set
 # CONFIG_boost-date-time is not set
 # CONFIG_boost-math is not set
-# CONFIG_boost-signals is not set
 # CONFIG_boost-wave is not set
 # CONFIG_boost-chrono is not set
 # CONFIG_boost-timer is not set
@@ -1904,43 +1903,43 @@ CONFIG_run-postinsts=y
 #
 # alsa-lib 
 #
-CONFIG_alsa-lib=y
+# CONFIG_alsa-lib is not set
 # CONFIG_alsa-lib-dbg is not set
 # CONFIG_alsa-lib-dev is not set
-CONFIG_alsa-server=y
-CONFIG_libasound=y
-CONFIG_alsa-conf-base=y
-CONFIG_alsa-conf=y
-CONFIG_alsa-oss=y
+# CONFIG_alsa-server is not set
+# CONFIG_libasound is not set
+# CONFIG_alsa-conf-base is not set
+# CONFIG_alsa-conf is not set
+# CONFIG_alsa-oss is not set
 
 #
 # libsndfile1 
 #
-CONFIG_libsndfile1=y
+# CONFIG_libsndfile1 is not set
 # CONFIG_libsndfile1-dbg is not set
 # CONFIG_libsndfile1-dev is not set
-CONFIG_libsndfile1-bin=y
+# CONFIG_libsndfile1-bin is not set
 
 #
 # pulseaudio 
 #
-CONFIG_pulseaudio=y
-CONFIG_pulseaudio-misc=y
-CONFIG_libpulse-mainloop-glib=y
+# CONFIG_pulseaudio is not set
+# CONFIG_pulseaudio-misc is not set
+# CONFIG_libpulse-mainloop-glib is not set
 # CONFIG_pulseaudio-dbg is not set
-CONFIG_libpulsecommon=y
-CONFIG_pulseaudio-module-console-kit=y
-CONFIG_pulseaudio-bash-completion=y
-CONFIG_libpulse-simple=y
-CONFIG_libpulsecore=y
-CONFIG_libpulse=y
+# CONFIG_libpulsecommon is not set
+# CONFIG_pulseaudio-module-console-kit is not set
+# CONFIG_pulseaudio-bash-completion is not set
+# CONFIG_libpulse-simple is not set
+# CONFIG_libpulsecore is not set
+# CONFIG_libpulse is not set
 # CONFIG_pulseaudio-dev is not set
-CONFIG_pulseaudio-server=y
+# CONFIG_pulseaudio-server is not set
 
 #
 # taglib 
 #
-CONFIG_taglib=y
+# CONFIG_taglib is not set
 # CONFIG_taglib-dev is not set
 # CONFIG_taglib-c is not set
 # CONFIG_taglib-dbg is not set
@@ -1948,7 +1947,7 @@ CONFIG_taglib=y
 #
 # ncurses 
 #
-CONFIG_ncurses=y
+# CONFIG_ncurses is not set
 # CONFIG_ncurses-terminfo-base is not set
 # CONFIG_ncurses-dev is not set
 # CONFIG_ncurses-tools is not set
@@ -2011,6 +2010,7 @@ CONFIG_ncurses=y
 # openssl 
 #
 # CONFIG_openssl is not set
+# CONFIG_openssl-bin is not set
 # CONFIG_openssl-conf is not set
 # CONFIG_openssl-dbg is not set
 # CONFIG_openssl-engines is not set
@@ -2130,7 +2130,7 @@ CONFIG_ncurses=y
 #
 # opencl-clhpp
 #
-# CONFIG_opencl-clhpp is not set
+# CONFIG_opencl-clhpp-dev is not set
 
 #
 # opencl-headers
@@ -2156,10 +2156,10 @@ CONFIG_ncurses=y
 #
 # alsa-state 
 #
-CONFIG_alsa-state=y
+# CONFIG_alsa-state is not set
 # CONFIG_alsa-state-dev is not set
 # CONFIG_alsa-state-dbg is not set
-CONFIG_alsa-states=y
+# CONFIG_alsa-states is not set
 
 #
 # apache2
@@ -2211,14 +2211,6 @@ CONFIG_alsa-states=y
 # CONFIG_ca-certificates is not set
 # CONFIG_ca-certificates-dev is not set
 # CONFIG_ca-certificates-dbg is not set
-
-#
-# chkconfig 
-#
-# CONFIG_chkconfig is not set
-# CONFIG_chkconfig-dbg is not set
-# CONFIG_chkconfig-dev is not set
-# CONFIG_chkconfig-alternatives is not set
 
 #
 # chrpath 
@@ -2319,7 +2311,7 @@ CONFIG_udev-extraconf=y
 #
 # gcc-runtime 
 #
-CONFIG_libstdcPLUSPLUS=y
+# CONFIG_libstdcPLUSPLUS is not set
 # CONFIG_libstdcPLUSPLUS-dev is not set
 
 #
@@ -2350,7 +2342,7 @@ CONFIG_libstdcPLUSPLUS=y
 #
 # glib-2.0 
 #
-CONFIG_glib-2.0=y
+# CONFIG_glib-2.0 is not set
 # CONFIG_glib-2.0-codegen is not set
 # CONFIG_glib-2.0-utils is not set
 # CONFIG_glib-2.0-dbg is not set
@@ -2363,7 +2355,7 @@ CONFIG_glib-2.0=y
 # CONFIG_glibc is not set
 # CONFIG_glibc-dev is not set
 # CONFIG_glibc-dbg is not set
-CONFIG_ldd=y
+# CONFIG_ldd is not set
 
 #
 # gnome-desktop-testing 
@@ -2513,8 +2505,6 @@ CONFIG_ldd=y
 # mkfontdir 
 #
 # CONFIG_mkfontdir is not set
-# CONFIG_mkfontdir-dev is not set
-# CONFIG_mkfontdir-dbg is not set
 
 #
 # mkfontscale 
@@ -2597,7 +2587,7 @@ CONFIG_packagegroup-core-boot=y
 #
 # packagegroup-core-buildessential 
 #
-CONFIG_packagegroup-core-buildessential=y
+# CONFIG_packagegroup-core-buildessential is not set
 # CONFIG_packagegroup-core-buildessential-dev is not set
 # CONFIG_packagegroup-core-buildessential-dbg is not set
 
@@ -2834,7 +2824,6 @@ CONFIG_packagegroup-core-ssh-dropbear=y
 # CONFIG_qtcharts-mkspecs is not set
 # CONFIG_qtcharts-dev is not set
 # CONFIG_qtcharts-dbg is not set
-# CONFIG_qtcharts-examples is not set
 # CONFIG_qtcharts-qmlplugins is not set
 # CONFIG_qtcharts-qmldesigner is not set
 
@@ -2845,7 +2834,6 @@ CONFIG_packagegroup-core-ssh-dropbear=y
 # CONFIG_qtconnectivity-tools is not set
 # CONFIG_qtconnectivity-mkspecs is not set
 # CONFIG_qtconnectivity-dev is not set
-# CONFIG_qtconnectivity-examples is not set
 # CONFIG_qtconnectivity-dbg is not set
 # CONFIG_qtconnectivity-qmlplugins is not set
 
@@ -2853,7 +2841,6 @@ CONFIG_packagegroup-core-ssh-dropbear=y
 # qtdeclarative 
 #
 # CONFIG_qtdeclarative is not set
-# CONFIG_qtdeclarative-examples is not set
 # CONFIG_qtdeclarative-dev is not set
 # CONFIG_qtdeclarative-dbg is not set
 # CONFIG_qtdeclarative-qmlplugins is not set
@@ -2863,11 +2850,8 @@ CONFIG_packagegroup-core-ssh-dropbear=y
 #
 # qtenginio 
 #
-# CONFIG_qtenginio is not set
 # CONFIG_qtenginio-qmlplugins is not set
-# CONFIG_qtenginio-mkspecs is not set
 # CONFIG_qtenginio-dbg is not set
-# CONFIG_qtenginio-dev is not set
 # CONFIG_qtenginio-examples is not set
 
 #
@@ -2885,7 +2869,6 @@ CONFIG_packagegroup-core-ssh-dropbear=y
 # CONFIG_qtlocation-plugins is not set
 # CONFIG_qtlocation-qmlplugins is not set
 # CONFIG_qtlocation-dbg is not set
-# CONFIG_qtlocation-examples is not set
 # CONFIG_qtlocation-dev is not set
 # CONFIG_qtlocation-mkspecs is not set
 
@@ -2895,7 +2878,6 @@ CONFIG_packagegroup-core-ssh-dropbear=y
 # CONFIG_qtmultimedia is not set
 # CONFIG_qtmultimedia-plugins is not set
 # CONFIG_qtmultimedia-mkspecs is not set
-# CONFIG_qtmultimedia-examples is not set
 # CONFIG_qtmultimedia-qmlplugins is not set
 # CONFIG_qtmultimedia-dev is not set
 # CONFIG_qtmultimedia-dbg is not set
@@ -2905,7 +2887,6 @@ CONFIG_packagegroup-core-ssh-dropbear=y
 #
 # CONFIG_qtquickcontrols is not set
 # CONFIG_qtquickcontrols-dbg is not set
-# CONFIG_qtquickcontrols-examples is not set
 # CONFIG_qtquickcontrols-dev is not set
 # CONFIG_qtquickcontrols-qmlplugins is not set
 # CONFIG_qtquickcontrols-qmldesigner is not set
@@ -2914,7 +2895,6 @@ CONFIG_packagegroup-core-ssh-dropbear=y
 # qtscript 
 #
 # CONFIG_qtscript is not set
-# CONFIG_qtscript-examples is not set
 # CONFIG_qtscript-mkspecs is not set
 # CONFIG_qtscript-dbg is not set
 # CONFIG_qtscript-dev is not set
@@ -2925,7 +2905,6 @@ CONFIG_packagegroup-core-ssh-dropbear=y
 # CONFIG_qtsensors is not set
 # CONFIG_qtsensors-dbg is not set
 # CONFIG_qtsensors-mkspecs is not set
-# CONFIG_qtsensors-examples is not set
 # CONFIG_qtsensors-dev is not set
 # CONFIG_qtsensors-plugins is not set
 # CONFIG_qtsensors-qmlplugins is not set
@@ -2936,7 +2915,6 @@ CONFIG_packagegroup-core-ssh-dropbear=y
 # CONFIG_qtserialport is not set
 # CONFIG_qtserialport-mkspecs is not set
 # CONFIG_qtserialport-dev is not set
-# CONFIG_qtserialport-examples is not set
 # CONFIG_qtserialport-dbg is not set
 
 #
@@ -2947,7 +2925,6 @@ CONFIG_packagegroup-core-ssh-dropbear=y
 # CONFIG_qtsvg-mkspecs is not set
 # CONFIG_qtsvg-dbg is not set
 # CONFIG_qtsvg-dev is not set
-# CONFIG_qtsvg-examples is not set
 
 #
 # qtsystems 
@@ -2957,14 +2934,12 @@ CONFIG_packagegroup-core-ssh-dropbear=y
 # CONFIG_qtsystems-tools is not set
 # CONFIG_qtsystems-dev is not set
 # CONFIG_qtsystems-qmlplugins is not set
-# CONFIG_qtsystems-examples is not set
 # CONFIG_qtsystems-mkspecs is not set
 
 #
 # qttools 
 #
 # CONFIG_qttools is not set
-# CONFIG_qttools-examples is not set
 # CONFIG_qttools-mkspecs is not set
 # CONFIG_qttools-dbg is not set
 # CONFIG_qttools-tools is not set
@@ -2999,7 +2974,6 @@ CONFIG_packagegroup-core-ssh-dropbear=y
 #
 # CONFIG_qtwebchannel is not set
 # CONFIG_qtwebchannel-dev is not set
-# CONFIG_qtwebchannel-examples is not set
 # CONFIG_qtwebchannel-dbg is not set
 # CONFIG_qtwebchannel-qmlplugins is not set
 # CONFIG_qtwebchannel-mkspecs is not set
@@ -3019,7 +2993,6 @@ CONFIG_packagegroup-core-ssh-dropbear=y
 # CONFIG_qtwebsockets is not set
 # CONFIG_qtwebsockets-dev is not set
 # CONFIG_qtwebsockets-qmlplugins is not set
-# CONFIG_qtwebsockets-examples is not set
 # CONFIG_qtwebsockets-mkspecs is not set
 # CONFIG_qtwebsockets-dbg is not set
 
@@ -3030,7 +3003,6 @@ CONFIG_packagegroup-core-ssh-dropbear=y
 # CONFIG_qtxmlpatterns-mkspecs is not set
 # CONFIG_qtxmlpatterns-dbg is not set
 # CONFIG_qtxmlpatterns-dev is not set
-# CONFIG_qtxmlpatterns-examples is not set
 # CONFIG_qtxmlpatterns-tools is not set
 
 #
@@ -3085,13 +3057,6 @@ CONFIG_packagegroup-core-ssh-dropbear=y
 # CONFIG_sysfsutils-dbg is not set
 
 #
-# sysprof 
-#
-# CONFIG_sysprof is not set
-# CONFIG_sysprof-dev is not set
-# CONFIG_sysprof-dbg is not set
-
-#
 # systemtap 
 #
 # CONFIG_systemtap is not set
@@ -3120,13 +3085,6 @@ CONFIG_tcf-agent=y
 # CONFIG_tcf-agent-dev is not set
 
 #
-# texi2html 
-#
-# CONFIG_texi2html is not set
-# CONFIG_texi2html-dbg is not set
-# CONFIG_texi2html-dev is not set
-
-#
 # tiff 
 #
 # CONFIG_tiff is not set
@@ -3145,11 +3103,11 @@ CONFIG_tcf-agent=y
 #
 # v4l-utils 
 #
-CONFIG_v4l-utils=y
-CONFIG_libv4l=y
+# CONFIG_v4l-utils is not set
+# CONFIG_libv4l is not set
 # CONFIG_ir-keytable is not set
 # CONFIG_v4l-utils-dev is not set
-CONFIG_media-ctl=y
+# CONFIG_media-ctl is not set
 # CONFIG_rc-keymaps is not set
 # CONFIG_v4l-utils-dbg is not set
 # CONFIG_libv4l-dev is not set
@@ -3376,7 +3334,7 @@ CONFIG_media-ctl=y
 #
 # yavta 
 #
-CONFIG_yavta=y
+# CONFIG_yavta is not set
 # CONFIG_yavta-dbg is not set
 # CONFIG_yavta-dev is not set
 
@@ -3387,17 +3345,16 @@ CONFIG_yavta=y
 #
 # alsa-plugins 
 #
-CONFIG_alsa-plugins=y
+# CONFIG_alsa-plugins is not set
 # CONFIG_alsa-plugins-dev is not set
 # CONFIG_alsa-plugins-dbg is not set
-CONFIG_alsa-plugins-pulseaudio-conf=y
+# CONFIG_alsa-plugins-pulseaudio-conf is not set
 
 #
 # gstreamer1.0 
 #
 # CONFIG_gstreamer1.0 is not set
 # CONFIG_gstreamer1.0-dev is not set
-# CONFIG_gstreamer1.0-bash-completion is not set
 # CONFIG_gstreamer1.0-dbg is not set
 
 #
@@ -3496,11 +3453,32 @@ CONFIG_bridge-utils=y
 #
 
 #
+# dosfstools 
+#
+# CONFIG_dosfstools is not set
+# CONFIG_dosfstools-dev is not set
+# CONFIG_dosfstools-dbg is not set
+
+#
 # patch 
 #
 # CONFIG_patch is not set
 # CONFIG_patch-dev is not set
 # CONFIG_patch-dbg is not set
+
+#
+# resize-part
+#
+# CONFIG_resize-part is not set
+# CONFIG_resize-part-dbg is not set
+# CONFIG_resize-part-dev is not set
+
+#
+# u-boot-tools
+#
+CONFIG_u-boot-tools=y
+# CONFIG_u-boot-tools-dbg is not set
+# CONFIG_u-boot-tools-dev is not set
 
 #
 # x11 
@@ -3620,8 +3598,6 @@ CONFIG_bridge-utils=y
 #
 # gnome-themes-standard 
 #
-# CONFIG_gnome-themes-standard-dev is not set
-# CONFIG_gnome-themes-standard-dbg is not set
 # CONFIG_gnome-theme-adwaita is not set
 
 #
@@ -3876,6 +3852,13 @@ CONFIG_bridge-utils=y
 # CONFIG_packagegroup-petalinux-dbg is not set
 
 #
+# packagegroup-petalinux-audio 
+#
+# CONFIG_packagegroup-petalinux-audio is not set
+# CONFIG_packagegroup-petalinux-audio-dbg is not set
+# CONFIG_packagegroup-petalinux-audio-dev is not set
+
+#
 # packagegroup-petalinux-display-debug 
 #
 # CONFIG_packagegroup-petalinux-display-debug is not set
@@ -3982,13 +3965,6 @@ CONFIG_bridge-utils=y
 # CONFIG_packagegroup-petalinux-x11-dev is not set
 
 #
-# packagegroup-petalinux-xrt 
-#
-# CONFIG_packagegroup-petalinux-xrt is not set
-# CONFIG_packagegroup-petalinux-xrt-dev is not set
-# CONFIG_packagegroup-petalinux-xrt-dbg is not set
-
-#
 # Image Features
 #
 CONFIG_imagefeature-ssh-server-dropbear=y
@@ -3996,7 +3972,7 @@ CONFIG_imagefeature-ssh-server-dropbear=y
 CONFIG_imagefeature-hwcodecs=y
 # CONFIG_imagefeature-package-management is not set
 CONFIG_imagefeature-debug-tweaks=y
-# CONFIG_auto-login is not set
+CONFIG_auto-login=y
 
 #
 # apps 
