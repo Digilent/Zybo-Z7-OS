@@ -191,7 +191,6 @@
 };
 
 &axi_gpio_eth {
-	#gpio-cells = <3>;
 	clock-names = "s_axi_aclk";
 	clocks = <&clkc 15>;
 };
